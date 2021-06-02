@@ -1,0 +1,128 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20 jun. 2019, 12:59:10
+    Author     : Luis Miguel Rubio Toledo © 
+*/
+
+body {
+    background-color: white;
+    text-align: justify;
+    font-size: 14px;
+    font-family: Arial;
+    color: #34348e;
+    font-weight: bold; 
+}
+.drag{
+    position: relative;
+    cursor: hand;
+    /*
+    z-index: 100;
+    */
+}
+
+#preview {
+    width: 700px;
+    height: 500px;
+    border:2px solid #ccc;
+    padding:5px;
+    border-radius:2px;
+    background:#fff;
+    max-width:700px;
+    overflow: hidden;
+    position: relative;
+}
+
+#preview img {
+    /* width:100%; */
+    width: 700px;
+    height: 500px;
+    display:block;
+}
+#preview #imgTransform img{
+    width: 300px;
+    height: 200px;
+}
+#preview #imgTransform #Transform img{
+    left: 200px;
+    bottom: 400px;
+}
+#form-piscinas {
+    position: relative;
+    left: 20%;
+}
+#piscinas {
+    width: 80%;
+    margin: auto;
+}
+#piscinas div img {
+    width: 100px;
+    height: 100px;
+    display: inline;
+}
+
+#piscinasMenu {
+    padding:10px;
+    background-color:#f6f6f6;
+    width:200px;
+    float: left;
+    margin: 8% 4%;
+    
+}
+.boton {
+    -moz-box-shadow:inset 0px 1px 0px 0px #7a8eb9;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #7a8eb9;
+    box-shadow:inset 0px 1px 0px 0px #7a8eb9;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #637aad), color-stop(1, #5972a7));
+    background:-moz-linear-gradient(top, #637aad 5%, #5972a7 100%);
+    background:-webkit-linear-gradient(top, #637aad 5%, #5972a7 100%);
+    background:-o-linear-gradient(top, #637aad 5%, #5972a7 100%);
+    background:-ms-linear-gradient(top, #637aad 5%, #5972a7 100%);
+    background:linear-gradient(to bottom, #637aad 5%, #5972a7 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#637aad', endColorstr='#5972a7',GradientType=0);
+    background-color:#324387;
+    border:1px solid #314179;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-weight:bold;
+    padding: 2% 4%;
+    margin-bottom: 1%;
+    text-decoration:none;
+    display:inline-block;
+    text-align: center;
+    text-shadow:0px 0px 0px #ffffff;
+    width: 90%;
+}
+.boton:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #5972a7), color-stop(1, #637aad));
+    background:-moz-linear-gradient(top, #5972a7 5%, #637aad 100%);
+    background:-webkit-linear-gradient(top, #5972a7 5%, #637aad 100%);
+    background:-o-linear-gradient(top, #5972a7 5%, #637aad 100%);
+    background:-ms-linear-gradient(top, #5972a7 5%, #637aad 100%);
+    background:linear-gradient(to bottom, #5972a7 5%, #637aad 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#5972a7', endColorstr='#637aad',GradientType=0);
+    background-color:#5972a7;
+    color: #fec821;
+}
+.boton:active {
+    position:relative;
+    top:1px;
+}
+
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    display: inline-block;
+    margin: 1%;
+    cursor: pointer;
+}
+.custom-file-upload span {
+    display: inline;
+    padding: 6px 12px;
+}

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<!--
+    Created on : 4 jun. 2019, 10:56:20
+    Author     : Luis Miguel Rubio Toledo ©
+-->
+<html>
+    <head>
+        <title>Crea Tu Piscina</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/estilos.css" />
+        <link rel="shortcut icon" href="#" />
+        <script type="text/javascript" src="java/general_functions.js"></script>
+        <script type="text/javascript" src="java/pool_functions.js"></script> 
+	<script type="text/javascript">
+		dragobject.initialize();
+	</script>
+        <script type="text/javascript">
+            var current_page = 1;
+            var records_per_page = 4;
+            
+            var cur = document.getElementById("piscinacurva");
+            var rec = document.getElementById("piscinarecta");
+            var objJson = [
+                { adName: '<img onclick=\'imgshow("_Rec_02");\' src="image/piscinas/piscina_Rec_02.png" alt="piscinarecta2_city80"/>'},
+                { adName: '<img onclick=\'imgshow("_Rec_03");\' src="image/piscinas/piscina_Rec_03.png" alt="piscinarecta3_entertainer7"/>'},
+                { adName: '<img onclick=\'imgshow("_Rec_04");\' src="image/piscinas/piscina_Rec_04.png" alt="piscinarecta4_lappool"/>'},
+                { adName: '<img onclick=\'imgshow("_Rec_05");\' src="image/piscinas/piscina_Rec_05.png" alt="piscinarecta5_platinum10"/>'},
+                { adName: '<img onclick=\'imgshow("_Rec_06");\' src="image/piscinas/piscina_Rec_06.png" alt="piscinarecta6_platinum6"/>'},
+                { adName: '<img onclick=\'imgshow("_Rec_07");\' src="image/piscinas/piscina_Rec_07.png" alt="piscinarecta7_platinum7"/>'},
+                { adName: '<img onclick=\'imgshow("_Rec_08");\' src="image/piscinas/piscina_Rec_08.png" alt="piscinarecta8_platinum8"/>'},
+                { adName: '<img onclick=\'imgshow("_Rec_09");\' src="image/piscinas/piscina_Rec_09.png" alt="piscinarecta9_president"/>'},
+                { adName: '<img onclick=\'imgshow("_Rec_10");\' src="image/piscinas/piscina_Rec_10.png" alt="piscinarecta10_rivera10"/>'},
+                { adName: '<img onclick=\'imgshow("_Rec_11");\' src="image/piscinas/piscina_Rec_11.png" alt="piscinarecta11_rivera8"/>'},
+                { adName: '<img onclick=\'imgshow("_Rec_12");\' src="image/piscinas/piscina_Rec_12.png" alt="piscinarecta12_vicepresident"/>'}
+            ]; // Can be obtained from another source, such as your objJson variable
+            console.log(objJson);
+            function prevPage()
+            {
+                if (current_page > 1) {
+                    current_page--;
+                    changePage(current_page);
+                }
+            }
+
+            function nextPage()
+            {
+                if (current_page < numPages()) {
+                    current_page++;
+                    changePage(current_page);
+                }
+            }
+
+            function changePage(page)
+            {
+                var btn_next = document.getElementById("btn_next");
+                var btn_prev = document.getElementById("btn_prev");
+                var listing_table = document.getElementById("listingTable");
+                var page_span = document.getElementById("page");
+
+                // Validate page
+                if (page < 1) page = 1;
+                if (page > numPages()) page = numPages();
+
+                listing_table.innerHTML = "";
+
+                for (var i = (page-1) * records_per_page; i < (page * records_per_page); i++) {
+                    listing_table.innerHTML += objJson[i].adName;
+                }
+                page_span.innerHTML = page;
+
+                if (page == 1) {
+                    btn_prev.style.visibility = "hidden";
+                } else {
+                    btn_prev.style.visibility = "visible";
+                }
+
+                if (page == numPages()) {
+                    btn_next.style.visibility = "hidden";
+                } else {
+                    btn_next.style.visibility = "visible";
+                }
+            }
+
+            function numPages()
+            {
+                return Math.ceil(objJson.length / records_per_page);
+            }
+
+            window.onload = function() {
+                changePage(1);
+            };
+
+            //for (var i = (page-1) * records_per_page; i < (page * records_per_page) && i < objJson.length; i++)
+        </script>
+    </head>
+    <body>
+        
+        <div id="piscinasMenu" style="visibility: hidden;">
+            <a onclick="mostrar_ocultar(1);" class="boton">psicina autocover</a><br />
+            <a onclick="mostrar_ocultar(2);" class="boton">piscina clasica</a><br />
+            <a onclick="mostrar_ocultar(3);" class="boton">piscina curva</a><br />
+            <a onclick="mostrar_ocultar(4);" class="boton">piscina recta</a><br />
+        </div>
+
+        <label class="custom-file-upload">
+            <input id="file" type="file" />
+            <span class="boton"> Elige Imagen </span>
+        </label>
+            <div  id="preview"> 
+                
+            </div>
+            <!--
+                    <label class="custom-file-upload"> cargar imagen
+    <input id="file" type="file" />
+            <hr />
+            <div id="preview"> </div>
+</label>
+          -->  
+        <script type="text/javascript">
+            document.getElementById("file").onchange = function(e) {
+                let reader = new FileReader();
+
+                reader.onload = function(){
+                    let preview = document.getElementById('preview'),
+                                image = document.createElement('img'),
+                                miDiv = createDiv('miDiv');
+
+                    image.src = reader.result;
+
+                    preview.innerHTML = '';
+                    
+                    miDiv.appendChild(image);
+                    miDiv.appendChild(createDiv('imgTransform'));
+                    preview.append(miDiv);
+                    
+                };
+                reader.readAsDataURL(e.target.files[0]);
+                
+                var frm = document.myForm;
+                if(frm.style.display === "none") {
+                    frm.style.display="block";
+                    document.getElementById("piscinasMenu").style.visibility = "visible";
+                }
+            }	
+        </script>
+        
+        <form name="myForm" style="display:none;" id="form-piscinas"
+              method="POST" enctype="multipart/form-data">
+        
+            <div id="transformarimagen" style="display:none;">
+        Inclinar:       <input name="rotateX" type="range" min="0" max="90" value="0" />
+        Tama&ntilde;o:        <input name="scale" type="range" min="0.1" max="2" value="1" step="0.1" />
+        Girar:          <input name="rotate" type="range" min="0" max="180" value="0" />
+        Perspectiva:    <input name="perspective" type="range" min="250" max="800" value="500" />
+        Altura:         <input name="translateZ" type="range" min="-50" max="50" value="0" />
+        
+        <br />
+        <br />
+            </div>
+        <div id="piscinas">
+            <a  href="javascript:prevPage()" id="btn_prev" class="arrow previous">&laquo;</a>
+            <div  id="piscinacurva" style="display:none;">
+                <img onclick='imgshow("_Cur_01");' src="image/piscinas/piscina_Cur_01.png" alt="piscinacurva1_oasis"/>
+                <img onclick='imgshow("_Cur_02");' src="image/piscinas/piscina_Cur_02.png" alt="piscinacurva2_freedom2000"/>
+                <img onclick='imgshow("_Cur_03");' src="image/piscinas/piscina_Cur_03.png" alt="piscinacurva3_sanremo"/>
+                <img onclick='imgshow("_Cur_04");' src="image/piscinas/piscina_Cur_04.png" alt="piscinacurva4_tropicana"/>
+            </div>
+            <div  id="piscinaclasica" style="display:none;">
+                <img onclick='imgshow("_Cla_01");' src="image/piscinas/piscina_Cla_01.png" alt="piscinaclasica1_grecian"/>
+                <img onclick='imgshow("_Cla_02");' src="image/piscinas/piscina_Cla_02.png" alt="piscinaclasica2_jamaican"/>
+                <img onclick='imgshow("_Cla_03");' src="image/piscinas/piscina_Cla_03.png" alt="piscinaclasica3_lagoona"/>
+                <img onclick='imgshow("_Cla_04");' src="image/piscinas/piscina_Cla_04.png" alt="piscinaclasica4_majestic"/>
+                <img onclick='imgshow("_Cla_05");' src="image/piscinas/piscina_Cla_05.png" alt="piscinaclasica5_hawaiian"/>
+            </div>
+            <div id="piscinaautocover" style="display:none;">
+                <img onclick='imgshow("_Aut_01");' src="image/piscinas/piscina_Aut_01.png" alt="piscinaautocover1_entertainer10"/>
+                <img onclick='imgshow("_Aut_02");' src="image/piscinas/piscina_Aut_02.png" alt="piscinaautocover2_entertainer7"/>
+                <img onclick='imgshow("_Aut_03");' src="image/piscinas/piscina_Aut_03.png" alt="piscinaautocover3_lappool"/>
+                <img onclick='imgshow("_Aut_04");' src="image/piscinas/piscina_Aut_04.png" alt="piscinaautocover4_platinum10"/> <br />
+                <img onclick='imgshow("_Aut_05");' src="image/piscinas/piscina_Aut_05.png" alt="piscinaautocover5_platinum7"/>
+                <img onclick='imgshow("_Aut_06");' src="image/piscinas/piscina_Aut_06.png" alt="piscinaautocover6_platinum8"/>
+                <img onclick='imgshow("_Aut_07");' src="image/piscinas/piscina_Aut_07.png" alt="piscinaautocover7_rivera10"/>
+                <img onclick='imgshow("_Aut_08");' src="image/piscinas/piscina_Aut_08.png" alt="piscinaautocover8_rivera8"/>
+            </div>
+            <div  id="piscinarecta" style="display:none;">
+                <img onclick='imgshow("_Rec_02");' src="image/piscinas/piscina_Rec_02.png" alt="piscinarecta2_city80"/>
+                <img onclick='imgshow("_Rec_03");' src="image/piscinas/piscina_Rec_03.png" alt="piscinarecta3_entertainer7"/>
+                <img onclick='imgshow("_Rec_04");' src="image/piscinas/piscina_Rec_04.png" alt="piscinarecta4_lappool"/> 
+                <img onclick='imgshow("_Rec_05");' src="image/piscinas/piscina_Rec_05.png" alt="piscinarecta5_platinum10"/> <br />
+                <img onclick='imgshow("_Rec_06");' src="image/piscinas/piscina_Rec_06.png" alt="piscinarecta6_platinum6"/>
+                <img onclick='imgshow("_Rec_07");' src="image/piscinas/piscina_Rec_07.png" alt="piscinarecta7_platinum7"/>
+                <img onclick='imgshow("_Rec_08");' src="image/piscinas/piscina_Rec_08.png" alt="piscinarecta8_platinum8"/> 
+                <img onclick='imgshow("_Rec_09");' src="image/piscinas/piscina_Rec_09.png" alt="piscinarecta9_president"/><br />
+                <img onclick='imgshow("_Rec_10");' src="image/piscinas/piscina_Rec_10.png" alt="piscinarecta10_rivera10"/>
+                <img onclick='imgshow("_Rec_11");' src="image/piscinas/piscina_Rec_11.png" alt="piscinarecta11_rivera8"/>
+                <img onclick='imgshow("_Rec_12");' src="image/piscinas/piscina_Rec_12.png" alt="piscinarecta12_vicepresident"/> 
+            </div>
+            
+        
+        <div  id="listingTable" class="list"></div>
+        <a href="javascript:nextPage()" id="btn_next" class="arrow next">&raquo;</a>
+
+        </div>
+        <script type="text/javascript">
+            var miNav = document.getElementById("transformarimagen");
+            var miInput = miNav.getElementsByTagName("input");
+            var tamanyo;
+            var rotar;
+            var perspectiva;
+            var altura;
+            var inclinar;
+            
+            for (var i = 0; i < miInput.length; i++) {
+
+                miInput[i].oninput = function(){
+                    var estilo =   [" -webkit-transform: ", " -moz-transform: ", 
+                                    " -o-transform: ", " -ms-transform: ", 
+                                    " transform: "];
+                    
+                    var izquierda = document.getElementById("Transform").offsetLeft;
+                    var arriba = document.getElementById("Transform").offsetTop;
+                    var miValor = this.value;
+                    switch (this.attributes[0].value) {
+                        case "scale":
+                            tamanyo = miValor;
+                            break;
+                        case "rotate":
+                            rotar = miValor;
+                            break;
+                        case "perspective":
+                            perspectiva = miValor;
+                            break;
+                        case "translateZ":
+                            altura = miValor;
+                            break;
+                        case "rotateX":
+                            inclinar = miValor;
+                            break;
+                        default:
+
+                            break;
+                    }
+
+                    for (var i = 0; i < estilo.length; i++){
+                        if (perspectiva >= 150 && 
+                                perspectiva <= 800)
+                            estilo[i] += "perspective(" + perspectiva + "px) ";
+                        if (inclinar >= 0 && 
+                                inclinar <= 90)
+                            estilo[i] += "rotateX(" + inclinar + "deg) ";
+                        if (tamanyo >= 0 && 
+                                tamanyo <= 2)
+                            estilo[i] += "scale(" + tamanyo + ") ";
+                        if (rotar >= 0 && 
+                                rotar <= 180)
+                            estilo[i] += "rotateZ(" + rotar + "deg) ";
+                        
+                        if (altura >= -50 && 
+                                altura <= 50)
+                            estilo[i] += "translateZ(" + altura + "px) ";
+                        
+                        estilo[i] += ";";
+                    }
+                    
+                    document.getElementById('Transform').style = estilo.join(" ") + 
+                            "left: "+izquierda+"px;" + "top: " +arriba+ "px;";
+                    
+                }; 
+
+            };
+            
+            
+        </script>
+        </form>
+
+        
+    </body>
+</html>
